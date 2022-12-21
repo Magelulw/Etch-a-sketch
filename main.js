@@ -1,1 +1,10 @@
 const color1 = document.querySelector(".color1")
+const color2 = document.querySelector(".color2")
+const color3 = document.querySelector(".color3")
+const color4 = document.querySelector(".color4")
+const color5 = document.querySelector(".color5")
+const color6 = document.querySelector(".color6")
+const color7 = document.querySelector(".color7")
+const color8 = document.querySelector(".color8")
+const color9 = document.querySelector(".color9")
+

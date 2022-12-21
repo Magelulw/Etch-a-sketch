@@ -1,5 +1,88 @@
+:root{
+    --clr-1:green;
+    --clr-2:red;
+    --clr-3:black;
+    --clr-4:white;
+    --clr-5:purple;
+    --clr-6:rgb(55, 247, 237);
+    --clr-7:lightgreen;
+    --clr-8:rgb(231, 209, 9);
+    --clr-9:orange;
+
+    /* ?grid size */
+
+    --clr-Picker-Size:20px;
+
+}
+
 *,::after,::before{
     margin:0;
     padding:0;
     box-sizing: border-box;
+}
+/*====================== */
+/*! COLOR GRID SECTION 
+========================*/
+
+section .colorGrid{
+    margin:2rem 0 0 2rem;
+
+    background-color: rgb(62, 72, 77);
+
+    width:6rem;
+    height:6rem;
+
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:0.2rem;
+}
+
+section .clrPicker{
+    display: grid;
+    margin:auto;
+
+    width:var(--clr-Picker-Size);
+    height:var(--clr-Picker-Size);
+}
+
+/** color Pickers */
+
+.color1{
+    background-color: var(--clr-1);
+}
+
+.color2{
+    background-color: var(--clr-2);
+}
+
+.color3{
+    background-color: var(--clr-3);
+}
+
+.color4{
+    background-color: var(--clr-4);
+}
+.color5{
+    background-color: var(--clr-5);
+}
+.color6{
+    background-color: var(--clr-6);
+}
+.color7{
+    background-color: var(--clr-7);
+}
+.color8{
+    background-color: var(--clr-8);
+}
+.color9{
+    background-color: var(--clr-9);
+}
+
+/* ============= */
+/* !  CANVAS 
+=================*/
+
+canvas{
+    background-color: gray;
 }
