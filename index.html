@@ -8,23 +8,28 @@
     <title>Document</title>
 </head>
 <body>
-    <section>
-    <div class="colorGrid">
-        <div class="clrPicker color1"></div>
-        <div class="clrPicker color2"></div>
-        <div class="clrPicker color3"></div>
-        <div class="clrPicker color4"></div>
-        <div class="clrPicker color5"></div>
-        <div class="clrPicker color6"></div>
-        <div class="clrPicker color7"></div>
-        <div class="clrPicker color8"></div>
-        <div class="clrPicker color9"></div>
-    </div>
-    </section>
+    <header>
+        <h1 class="title">Etch-a-sketch</h1>
+    </header>
 
     <section class="PaintField">
-        <canvas width="500px" height="600px"></canvas>
+        <canvas width="600px" height="600px"></canvas>
     </section>
+
+    <div class="container">
+        <input type="color" id="colorPicker" value="#33333">
+
+        <input type="button" id="rainbowMode" value="Rainbow Mode">
+
+        <input type="button" id="eraser" value="Eraser">
+
+        <input type="button" id="clear" value="Clear">
+
+        <div id="sizeValue">16 x 16</div>
+        <input type="range" id="gridSize">
+
+    </div>
+
 </body>
 <script src="main.js"></script>
 </html>
