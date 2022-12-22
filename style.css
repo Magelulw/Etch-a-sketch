@@ -58,7 +58,12 @@ canvas{
     gap:3rem;
 }
 
-
+@media screen and (max-width: 1600px) {
+    .container{
+        left:6%;
+        top:15%;
+    }
+  }
 input,button{
     width:10rem;
     height:3rem;
