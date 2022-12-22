@@ -1,10 +1,36 @@
-const color1 = document.querySelector(".color1")
-const color2 = document.querySelector(".color2")
-const color3 = document.querySelector(".color3")
-const color4 = document.querySelector(".color4")
-const color5 = document.querySelector(".color5")
-const color6 = document.querySelector(".color6")
-const color7 = document.querySelector(".color7")
-const color8 = document.querySelector(".color8")
-const color9 = document.querySelector(".color9")
+const canvas = document.querySelector("canvas");
+const ctx = canvas.getContext("2d");
 
+ctx.strokeStyle = "#BAD";
+ctx.lineWidth = 10;
+ctx.lineCap = "round";
+ctx.lineJoin = "round";
+
+
+let lastX = 0;
+let lastY = 0;
+let hue = 0;
+let isDrawing = false;
+
+
+function draw(e){
+if(!isDrawing) return;
+console.log(e)
+
+ctx.beginPath();
+
+ctx.moveTo(lastX, lastY);
+
+ctx.lineTo(e.offsetX, e.offsetY);
+ctx.stroke();
+[lastX, lastY] = [e.offsetX, e.offsetY]
+}
+
+canvas.addEventListener("mousedown", (e) =>{
+    isDrawing = true;
+    [lastX,lastY] = [e.offsetX, e.offsetY]
+})
+
+canvas.addEventListener("mousemove",draw);
+canvas.addEventListener("mouseout", () => isDrawing = false);
+canvas.addEventListener("mouseup", () => isDrawing = false);
