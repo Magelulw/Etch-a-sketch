@@ -1,6 +1,9 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
+const eraserBtn = document.querySelector("#eraser")
+const clearBtn = document.querySelector("#clear")
+
 ctx.strokeStyle = "#BAD";
 ctx.lineWidth = 10;
 ctx.lineCap = "round";
@@ -15,7 +18,7 @@ let isDrawing = false;
 
 function draw(e){
 if(!isDrawing) return;
-console.log(e)
+// console.log(e)
 
 ctx.beginPath();
 
@@ -34,3 +37,13 @@ canvas.addEventListener("mousedown", (e) =>{
 canvas.addEventListener("mousemove",draw);
 canvas.addEventListener("mouseout", () => isDrawing = false);
 canvas.addEventListener("mouseup", () => isDrawing = false);
+
+
+
+//! clears everything from the Canvas
+clearBtn.addEventListener("click", () =>{
+    const context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
+})
+
+
