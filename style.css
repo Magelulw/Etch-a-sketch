@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter+Tight&family=Peralta&family=Poppins:wght@500&family=Raleway:wght@400;700&family=Roboto+Slab&family=Source+Sans+Pro:wght@600&display=swap');
 
 :root{
-    --clr-1:green;
+    --clr-1:rgb(206, 206, 214);
     --clr-2:red;
     --clr-3:black;
     --clr-4:white;
@@ -61,9 +61,8 @@ body{
 
 
 @media screen and (max-width: 1600px) {
-    .container{
-        left:6%;
-        top:15%;
+    .features{
+        margin-left:1.4rem;
     }
   }
 
@@ -101,7 +100,7 @@ input,button{
     background-color: var(--clr-4);
 
 
-    border: 1px solid white;
+    border: 0px solid white;
     border-radius: 5px;
 
     box-shadow: 0px 0px 10px #363535;
@@ -112,9 +111,9 @@ input,button{
 /*? grids */
 
 .grid{
-    background-color: var(--clr-1);
+    background-color:rgb(240, 240, 240);
     width: 30px;
     height: 30px;
 
-    border:1px solid black;
+    border:0.5px solid rgb(56, 56, 56);
 }

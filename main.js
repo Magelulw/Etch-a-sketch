@@ -1,31 +1,35 @@
 const paintingWall = document.querySelector(".paintingWall");
-const container = document.querySelector(".container")
+const container = document.querySelector(".container");
 
-wallWidthSize = paintingWall.style.width = "45rem"
-wallHeightSize = paintingWall.style.height = "45rem"
+wallWidthSize = paintingWall.style.width = "40rem";
+wallHeightSize = paintingWall.style.height = "40rem";
 
-let gridSize = 80;
+let gridSize = 8;
 
-// paintingWall.style["background-color"] = `repeat(${gridSize},1fr)`
-let wallWidth = wallWidthSize.replace("rem","")
-let wallHeight = wallHeightSize.replace("rem","")
 
-paintingWall.style["grid-template-columns"] = `repeat(${gridSize},1fr)`
+let wallWidth = wallWidthSize.replace("rem","");
+let wallHeight = wallHeightSize.replace("rem","");
 
-console.log(wallWidth / gridSize)
-
+paintingWall.style["grid-template-columns"] = `repeat(${gridSize},1fr)`;
 
 
 for(let row = 0; row < gridSize; row++){
     for(let col = 0; col < gridSize; col++){
-        const newDiv = document.createElement("div");
+        const gridCell = document.createElement("div");
+        
+        gridCell.classList.add("grid", 'grid-cell')
 
-        newDiv.style.width = `${(wallWidth / gridSize)}rem`
-        newDiv.style.height = `${(wallHeight / gridSize)}rem`
+        gridCell.addEventListener("mousedown",() => {
+            gridCell.style.background = "yellow"
+        })
 
-        newDiv.classList.add("grid")
-        paintingWall.appendChild(newDiv)
+        paintingWall.appendChild(gridCell)
     }
 }
 
 
+const gridCells = document.querySelectorAll(".grid-cell");
+gridCells.forEach((cell) =>{
+    cell.style.width = `${(wallWidth / gridSize)}rem`;
+    cell.style.height = `${(wallHeight / gridSize)}rem`;
+});
