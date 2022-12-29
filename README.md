@@ -2,6 +2,17 @@
 This is my etch a skecth projet from the Odein project
 
 
-let mouseDown = false
-document.body.onmousedown = () => (mouseDown = true)
-document.body.onmouseup = () => (mouseDown = false)
+
+
+
+//! colors the grid
+gridCell.addEventListener("mousemove",() => {
+        gridCell.style.background = "yellow"
+})
+
+//! clears all the grid Color
+clearBtn.addEventListener("click", () => {
+        gridCell.forEach(cell => {
+            cell.style.background = "red"
+    })
+})
