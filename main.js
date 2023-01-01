@@ -109,6 +109,8 @@ function setMode(e){
     }
     else if(currentMode === "penChanger"){
         e.target.style.background = currentColor
+    }else if(currentMode === "default"){
+        e.target.style.background = "black"
     }
 }
 
