@@ -1,9 +1,22 @@
-const paintingWall = document.querySelector(".paintingWall");
-const container = document.querySelector(".container");
-
 let mouseDown = false
 document.body.onmousedown = () => (mouseDown = true)
 document.body.onmouseup = () => (mouseDown = false)
+
+const DEFAULT_COLOR = "black";
+const DEFAULT_GRID_SIZE = 16;
+const DEFAULT_MODE = "default";
+
+let currentColor = DEFAULT_COLOR;
+let currentGridSize = DEFAULT_GRID_SIZE;
+let currentMode = DEFAULT_MODE;
+
+
+function setCurrentColor(newClr){
+    currentColor = newClr
+}
+
+const paintingWall = document.querySelector(".paintingWall");
+const container = document.querySelector(".container");
 
 //* all the buttons and features;
 const penColorChanger = document.querySelector("#colorPicker");
@@ -11,91 +24,97 @@ const rainbowClr = document.querySelector("#rainbowMode");
 const eraserBtn = document.querySelector("#eraser");
 const clearBtn = document.querySelector("#clear");
 const sizeValue = document.querySelector("#sizeValue")
-const gridRange = document.querySelector("#gridSize")
+const gridSizeSlider = document.querySelector("#gridSizeMaker");
 
-let gridSize = gridRange.value;
-let currentMode = "default";
-
-sizeValue.textContent = `${gridSize} x ${gridSize}`
-
-
-penColorChanger.oninput = () => {currentMode }
-rainbowClr.onclick = () => {currentMode = "rainbow"};
-eraserBtn.onclick = () => {currentMode = "eraser"};
-clearBtn.onclick = () => setGridToTheStart()
+clearBtn.onclick = () => reloadGrid()
+gridSizeSlider.onchange = (e) => updateGridSize(e.target.value)
+gridSizeSlider.onmousemove = (e) => gridSizeText(e.target.value)
 
 
+rainbowClr.onclick = () => currentMode = "rainbow";
+eraserBtn.onclick = () => currentMode = "eraser";
 
-paintingWall.style["grid-template-columns"] = `repeat(${gridSize},1fr)`;
+penColorChanger.oninput = (e) => setCurrentColor(e.target.value)
+penColorChanger.onchange = () => currentMode = "penChanger";
 
-function runGame(){
-    createGrid()
-    setGridSize()
+
+
+function updateGridSize(value){
+    clearGrid(value);
+    createGrid(value);
+    setGridSize(value);
+    gridSizeText(value);
+
 }
-runGame()
 
-function setGridToTheStart(){
+
+function gridSizeText(size){
+    sizeValue.textContent = `${size} x ${size}`
+}
+
+function reloadGrid(){
     clearGrid()
-    createGrid()
-    setGridSize()
+    createGrid(currentGridSize)
+    setGridSize(currentGridSize)
+    gridSizeText(currentGridSize)
+    gridSizeSlider.value = currentGridSize
 }
 
-
-function createGrid(){
-    for(let cells = 0; cells < (gridSize * gridSize); cells++){
-            let gridCell = document.createElement("div");
-
-            gridCell.addEventListener("mouseover",changeClr);
-            gridCell.addEventListener("mousedown",changeClr);
-
-            paintingWall.appendChild(gridCell).classList.add("grid", 'grid-cell');
-        }
-}
-
-
-
-
-//*change Color Mode
-function changeClr(e){
-    if(e.type === "mouseover" && !mouseDown) return;
-    
-    if(currentMode === "rainbow"){
-        let clr1 = Math.floor(Math.random() * 256);
-        let clr2 = Math.floor(Math.random() * 256);
-        let clr3 = Math.floor(Math.random() * 256);
-    
-        e.target.style.background = `rgb(${clr1},${clr2},${clr3})`;
-    }else if(currentMode === "default"){
-        e.target.style.background = "black"
-    }else if(currentMode === "eraser"){
-        e.target.style.background = "white"
-    }
-    else if(currentMode === "penChanger"){
-        e.target.style.background = value
-    }
-
-}
-
-
-
-//*clears the grid Color
 function clearGrid(){
     paintingWall.innerHTML = ""
 }
 
-//*sets the grid Size for each cell
-function setGridSize(){
-    wallWidthSize = paintingWall.style.width = "40rem";
-    wallHeightSize = paintingWall.style.height = "40rem";
+function createGrid(size){
+    paintingWall.style.gridTemplateColumns = `repeat(${size},1fr)`
+    paintingWall.style.gridTemplateRows = `repeat(${size},1fr)`
+
+    for(let i = 0; i < (size * size); i++){
+        let gridCell = document.createElement("div");
+        
+        gridCell.addEventListener("mouseover", setMode);
+        gridCell.addEventListener("click", setMode);
+
+        paintingWall.appendChild(gridCell).classList.add("grid", 'grid-cell');
+    }
+}
+
+function setGridSize(size){
+    let wallWidthSize = paintingWall.style.width = "40rem";
+    let wallHeightSize = paintingWall.style.height = "40rem";
 
 
-    let wallWidth = wallWidthSize.replace("rem","");
-    let wallHeight = wallHeightSize.replace("rem","");
+    wallWidth = wallWidthSize.replace("rem","");
+    wallHeight = wallHeightSize.replace("rem","");
 
     const gridCells = document.querySelectorAll(".grid-cell");
 
     gridCells.forEach((cell) =>{
-        cell.style.width = `${(wallWidth / gridSize)}rem`;
-        cell.style.height = `${(wallHeight / gridSize)}rem`;
+        cell.style.width = `${(wallWidth / size)}rem`;
+        cell.style.height = `${(wallHeight / size)}rem`;
     });
+}
+
+
+function setMode(e){
+    if(e.type === "mouseover" && !mouseDown) return;
+
+    if(currentMode === "rainbow"){
+        let rgb1 = Math.floor(Math.random () * 256)
+        let rgb2 = Math.floor(Math.random () * 256)
+        let rgb3 = Math.floor(Math.random () * 256)
+
+        e.target.style.background = `rgb(${rgb1},${rgb2},${rgb3})`
+    }else if(currentMode === "eraser"){
+        e.target.style.background = "white"
+    }
+    else if(currentMode === "penChanger"){
+        e.target.style.background = currentColor
+    }
+}
+
+
+window.onload = () => {
+    updateGridSize(currentGridSize)
+    gridSizeText(currentGridSize)
+    gridSizeSlider.value = currentGridSize
 }
