@@ -18,6 +18,7 @@ function setCurrentColor(newClr){
 const paintingWall = document.querySelector(".paintingWall");
 const container = document.querySelector(".container");
 
+const elTitle = document.querySelector(".title")
 //* all the buttons and features;
 const penColorChanger = document.querySelector("#colorPicker");
 const rainbowClr = document.querySelector("#rainbowMode");
@@ -106,11 +107,14 @@ function setMode(e){
         e.target.style.background = `rgb(${rgb1},${rgb2},${rgb3})`
     }else if(currentMode === "eraser"){
         e.target.style.background = "white"
+        elTitle.style.color = "white"       
     }
     else if(currentMode === "penChanger"){
         e.target.style.background = currentColor
+        elTitle.style.color = currentColor
     }else if(currentMode === "default"){
         e.target.style.background = "black"
+        elTitle.style.color = "black"
     }
 }
 
