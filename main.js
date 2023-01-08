@@ -11,6 +11,7 @@ let currentGridSize = DEFAULT_GRID_SIZE;
 let currentMode = DEFAULT_MODE;
 
 
+
 function setCurrentColor(newClr){
     currentColor = newClr
 }
